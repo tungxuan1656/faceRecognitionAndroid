@@ -214,7 +214,7 @@ public class Recognition extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                nameText.setText("That didn't work!");
+//                nameText.setText("That didn't work!");
             }
         });
         queue.add(stringRequest);

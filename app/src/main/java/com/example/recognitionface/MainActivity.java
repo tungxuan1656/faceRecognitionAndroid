@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         else Log.e("Load", "False");
 
         save_Haar();
-        load_Image();
+        deleteImage();
 
         capturebutton = (Button)findViewById(R.id.btnChangeCapture);
         capturebutton.setOnClickListener(new View.OnClickListener() {
@@ -72,40 +72,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void load_Image() {
-        File fileimage = new File(getFilesDir(), "image2.jpg");
+    void deleteImage() {
+        File fileimage = new File(getFilesDir(), "image.jpg");
         if (fileimage.exists()) {
-            Log.e("fileimage", "OK");
-        }
-        else {
-            Log.e("fileimage", "not OK");
-            InputStream inputStream = getResources().openRawResource(R.raw.img);
-            try {
-                OutputStream output = new FileOutputStream(fileimage);
-                byte[] buffer = new byte[1024]; // or other buffer size
-                int read;
-//                Log.e("read", "start");
-                while ((read = inputStream.read(buffer)) != -1) {
-                    output.write(buffer, 0, read);
-                }
-                output.flush();
-                output.close();
-                Log.e("read", "end");
-            } catch (Exception e){
-            }
-            try {
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        File fileimage2 = new File(getFilesDir(), "image2.jpg");
-        if (fileimage2.exists()) {
-            Log.e("fileimage2", "OK");
-        }
-        else {
-            Log.e("fileimage2", "not OK");
+            Log.e("fileimage", "need Delete");
+            fileimage.delete();
         }
     }
 }

@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
@@ -66,6 +67,7 @@ public class Camera extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         File fileimage = new File(getFilesDir(), "image.jpg");
+
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 1) {
@@ -85,9 +87,6 @@ public class Camera extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                if (fileimage.exists()) Log.e("image.jpg", "Exists");
-                else Log.e("image.jpg", "not Exists");
             }
         }
 
@@ -121,8 +120,16 @@ public class Camera extends AppCompatActivity {
     }
 
     void startRecognition(){
-        Intent intent = new Intent(this, Recognition.class);
-        startActivity(intent);
+        File fileimage = new File(getFilesDir(), "image.jpg");
+        if (fileimage.exists()) {
+            Log.e("image.jpg", "Exists");
+            Intent intent = new Intent(this, Recognition.class);
+            startActivity(intent);
+        }
+        else {
+            Log.e("image.jpg", "not Exists");
+            Toast.makeText(Camera.this, "Không tìm thấy ảnh!", Toast.LENGTH_LONG).show();
+        }
     }
 
 }
